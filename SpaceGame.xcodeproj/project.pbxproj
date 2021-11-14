@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		914423052741146700C1642B /* starfield.sks in Resources */ = {isa = PBXBuildFile; fileRef = 914423032741146700C1642B /* starfield.sks */; };
+		914423062741146700C1642B /* explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 914423042741146700C1642B /* explosion.sks */; };
 		9148A018273FFB3700064BDF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9148A017273FFB3700064BDF /* AppDelegate.swift */; };
 		9148A01A273FFB3700064BDF /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9148A019273FFB3700064BDF /* GameScene.sks */; };
 		9148A01E273FFB3700064BDF /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9148A01D273FFB3700064BDF /* GameScene.swift */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		914423032741146700C1642B /* starfield.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = starfield.sks; sourceTree = "<group>"; };
+		914423042741146700C1642B /* explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = explosion.sks; sourceTree = "<group>"; };
 		9148A014273FFB3700064BDF /* SpaceGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9148A017273FFB3700064BDF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9148A019273FFB3700064BDF /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -64,6 +68,8 @@
 				9148A021273FFB3700064BDF /* Main.storyboard */,
 				9148A024273FFB3D00064BDF /* Assets.xcassets */,
 				9148A026273FFB3D00064BDF /* LaunchScreen.storyboard */,
+				914423042741146700C1642B /* explosion.sks */,
+				914423032741146700C1642B /* starfield.sks */,
 			);
 			path = SpaceGame;
 			sourceTree = "<group>";
@@ -129,6 +135,8 @@
 				9148A023273FFB3700064BDF /* Main.storyboard in Resources */,
 				9148A01A273FFB3700064BDF /* GameScene.sks in Resources */,
 				9148A025273FFB3D00064BDF /* Assets.xcassets in Resources */,
+				914423062741146700C1642B /* explosion.sks in Resources */,
+				914423052741146700C1642B /* starfield.sks in Resources */,
 				9148A028273FFB3D00064BDF /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -11,6 +11,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var starfield: SKEmitterNode!
     var player: SKSpriteNode!
     var scoreLabel: SKLabelNode!
+    let playAgain: SKLabelNode!
+    
+    var possibleEnemies = ["ball", "hammer", "tv"]
+    var gameTimer: Timer?
+    var isGameOver = false {
+        didSet{
+            gameTimer?.invalidate()
+            playAgain = SKLabelNode(fontNamed: "Chalkduster")
+            playAgain.position = CGPoint(x: 512, y: 384)
+            playAgain.horizontalAlignmentMode = .center
+            playAgain.fontSize = 54
+            playAgain.text = "Play again"
+            addChild(playAgain)
+        }
+    }
+    var timeInterval = 1.0
+    var enemiesCreatedNumber = 0
 
     var score = 0 {
         didSet {
@@ -41,10 +58,62 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         physicsWorld.gravity = .zero
         physicsWorld.contactDelegate = self // tell us when contact happen
+        
+        gameTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(createEnemy), userInfo: nil, repeats: true)
     }
 
+    @objc func createEnemy() {
+        enemiesCreatedNumber += 1
+        guard let enemy = possibleEnemies.randomElement() else {return}
+        let sprite = SKSpriteNode(imageNamed: enemy)
+        sprite.position = CGPoint(x: 1200, y: Int.random(in: 50...736))
+        addChild(sprite)
+        
+        sprite.physicsBody = SKPhysicsBody(texture: sprite.texture!, size: sprite.size)
+        sprite.physicsBody?.categoryBitMask = 1
+        sprite.physicsBody?.velocity = CGVector(dx: -500, dy: 0)
+        sprite.physicsBody?.angularVelocity = 5
+        sprite.physicsBody?.linearDamping = 0
+        sprite.physicsBody?.angularDamping = 0
+        
+        if enemiesCreatedNumber % 20 == 0 {
+            timeInterval -= 0.1
+            gameTimer?.invalidate()
+            gameTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(createEnemy), userInfo: nil, repeats: true)
+        }
+    }
     
     override func update(_ currentTime: TimeInterval) {
-
+        for node in children {
+            if node.position.x < -300 {
+                node.removeFromParent()
+            }
+            if !isGameOver {
+                score += 1
+            }
+        }
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else {return}
+        var location = touch.location(in: self)
+        
+        if location.y < 100 {
+            location.y = 100
+        } else if location.y > 668 {
+            location.y = 668
+        }
+        
+        player.position = location
+    }
+    
+    // if contact happens
+    func didBegin(_ contact: SKPhysicsContact) {
+        let explosion = SKEmitterNode(fileNamed: "explosion")!
+        explosion.position = player.position
+        addChild(explosion)
+        
+        player.removeFromParent()
+        isGameOver = true
     }
 }
